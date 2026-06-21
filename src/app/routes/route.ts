@@ -3,7 +3,8 @@ import { ExpressRouter } from '@lib/http/routing/expressRouter'
 const router = new ExpressRouter();
 
 
-router.GET_REACT('Home', {
+router
+    .GET_REACT('Home', {
     title: 'Express.js Kusto Service',
     props: {
         FRAMEWORK_URL: `https://github.com/taxi-tabby/express.js-kusto`,
