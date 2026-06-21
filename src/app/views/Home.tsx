@@ -10,6 +10,7 @@ import type { ReactNode } from 'react';
 type HomeProps = {
     FRAMEWORK_URL?: string;
     NODE_ENV?: string;
+    version?: string;
 };
 
 type Cap = { n: string; title: string; desc: string; tag?: string };
@@ -61,7 +62,7 @@ function ArrowLink({ href, children }: { href: string; children: ReactNode }) {
     );
 }
 
-export default function Home({ FRAMEWORK_URL, NODE_ENV }: HomeProps) {
+export default function Home({ FRAMEWORK_URL, NODE_ENV, version }: HomeProps) {
     const isDev = NODE_ENV === 'development';
     const installCmd = 'npm install && npm run dev';
 
@@ -73,9 +74,11 @@ export default function Home({ FRAMEWORK_URL, NODE_ENV }: HomeProps) {
                     <span className="font-display text-[17px] font-extrabold tracking-tight text-ink">
                         Express.js<span className="text-accent">-</span>Kusto
                     </span>
-                    <span className="hidden rounded-[4px] border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted sm:inline-block">
-                        v0.2.1
-                    </span>
+                    {version ? (
+                        <span className="hidden rounded-[4px] border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted sm:inline-block">
+                            v{version}
+                        </span>
+                    ) : null}
                 </div>
                 <div className="flex items-center gap-5 font-mono text-[12px] text-muted">
                     <a href="/demo" className="transition-colors hover:text-ink">Demo</a>
