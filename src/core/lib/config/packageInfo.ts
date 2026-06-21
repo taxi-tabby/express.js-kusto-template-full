@@ -15,21 +15,16 @@ export interface PackageInfo {
 
 const FALLBACK: PackageInfo = { name: 'kusto-server', version: '0.0.0' };
 
-/** 첫 성공 로드 결과를 메모이즈(프로세스 수명 동안 1회만 읽음). 실패는 캐시하지 않아 추후 복구 가능. */
-let cached: PackageInfo | undefined;
-
-/** package.json 의 name/version/description 을 반환(첫 호출 시 읽고 캐시, 실패 시 단일 fallback, 무로그). */
+/** package.json 의 name/version/description 을 반환(로드 실패 시 단일 fallback, 무로그). */
 export function getPackageInfo(): PackageInfo {
-    if (cached) return cached;
     try {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const pkg = require('../../../../package.json') as Partial<PackageInfo>;
-        cached = {
+        return {
             name: pkg.name ?? FALLBACK.name,
             version: pkg.version ?? FALLBACK.version,
             description: pkg.description,
         };
-        return cached;
     } catch {
         return { ...FALLBACK };
     }

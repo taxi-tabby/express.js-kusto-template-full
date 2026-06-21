@@ -29,7 +29,7 @@ Loads the `.env` file exactly once relative to `process.cwd()` (`dotenv.config`)
 
 The single source for reading `package.json`'s `name`/`version`/`description`. It consolidates a previous problem where `crudHelpers`/`errorHandler`/`documentationGenerator` each did `require('.../package.json')` and held different fallbacks (`kusto-server` vs `kusto-api`), so the app name could be inconsistent on load failure.
 
-- **Main exports**: `getPackageInfo()` → `{ name, version, description? }` (**memoized** — reads `package.json` once on first call and caches the result for the process lifetime; a load failure returns the single `kusto-server`/`0.0.0` fallback without caching, so a later call can still recover; no logging), `getImplementationString()` → `"name v version"` (for JSON:API `meta.implementation`), `interface PackageInfo`.
+- **Main exports**: `getPackageInfo()` → `{ name, version, description? }` (a single fallback of `kusto-server`/`0.0.0` on load failure, no logging), `getImplementationString()` → `"name v version"` (for JSON:API `meta.implementation`), `interface PackageInfo`.
 - **Dependencies**: None (a leaf that only reads the root `package.json` via `require`). Inlined when bundled by webpack; in dev, ts-node resolves the require.
 
 ## Import Rules
