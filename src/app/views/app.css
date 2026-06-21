@@ -4,34 +4,51 @@
  * The extension (cssEntry default: views/app.css) compiles this with @tailwindcss/postcss,
  * scanning src/app/views/** for class names, and serves the result at
  * /__kusto_react/client.css (linked into every GET_REACT shell). No build script needed.
+ *
+ * Aesthetic: warm "engineering paper" — ink on bone, one deep-green accent, editorial grid.
  */
 @import "tailwindcss";
 
 @theme {
-    /* Brand palette */
-    --color-brand: #22c55e;
-    --color-brand-600: #16a34a;
-    --color-brand-700: #15803d;
-    --color-accent: #3b82f6;
-    --color-surface: #1a1a1a;
-    --color-surface-2: #212121;
-    --color-edge: #2a2a2a;
+    /* Surface — warm paper */
+    --color-paper: #ece7dc;
+    --color-paper-2: #e3ddcf;
+    --color-ink: #15140d;
+    --color-ink-soft: #36342a;
+    --color-muted: #79755f;
+    --color-line: #cbc5b4;
+    --color-line-soft: #d8d2c3;
 
-    /* Fonts (loaded via <head> links in src/app/extensions/react.ts) */
-    --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    /* One accent — flat botanical green (a nod to the brand, no neon) */
+    --color-accent: #0f5d3a;
+    --color-accent-soft: #1c7a4e;
+
+    /* Type system */
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-sans: "IBM Plex Sans KR", ui-sans-serif, system-ui, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-    /* Entrance animation */
-    --animate-fade-up: fade-up 0.8s ease-out both;
+    /* Orchestrated load */
+    --animate-rise: rise 0.85s cubic-bezier(0.22, 0.68, 0.18, 1) both;
+    --animate-line: line-grow 1s cubic-bezier(0.65, 0, 0.2, 1) both;
 
-    @keyframes fade-up {
+    @keyframes rise {
         from {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(14px);
         }
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+
+    @keyframes line-grow {
+        from {
+            transform: scaleX(0);
+        }
+        to {
+            transform: scaleX(1);
         }
     }
 }
@@ -41,10 +58,17 @@
     body {
         margin: 0;
         padding: 0;
-        background-color: #0a0a0a;
-        color: #e4e4e7;
+        background-color: var(--color-paper);
+        color: var(--color-ink);
         font-family: var(--font-sans);
+        font-optical-sizing: auto;
+        text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+        background: var(--color-accent);
+        color: var(--color-paper);
     }
 }

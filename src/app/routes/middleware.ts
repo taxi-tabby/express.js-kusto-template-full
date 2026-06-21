@@ -13,11 +13,11 @@ import { defaultGlobalMiddleware } from '@core/index';
  * Core 가 defaultGlobalMiddleware() 기본을 자동 적용한다.
  */
 export default [
-    // React 확장(@expressjs-kusto/react)의 CSR shell 은 페이지/props 를 inline <script>
-    // 로 주입하고, Home 페이지는 Google Fonts / Font Awesome CDN 을 쓴다. Helmet 기본 CSP
-    // (scriptSrc: 'self')는 nonce 없는 inline 스크립트를 차단하므로 — 그 결과
-    // window.__KUSTO_PAGE__ 가 설정되지 않아 'page "undefined" was not found' 가 뜬다 —
-    // scriptSrc 에 'unsafe-inline' 을, style/font 에 사용하는 CDN 호스트를 허용한다.
+    // React 확장(@expressjs-kusto/react)의 CSR shell 은 페이지/props 를 inline <script> 로
+    // 주입한다. Helmet 기본 CSP(scriptSrc: 'self')는 nonce 없는 inline 스크립트를 차단하므로
+    // — 그 결과 window.__KUSTO_PAGE__ 가 설정되지 않아 'page "undefined" was not found' 가
+    // 뜬다 — scriptSrc 에 'unsafe-inline' 을 허용한다. Home 페이지 웹폰트(Google Fonts)용
+    // style/font 호스트와, 페이퍼 그레인 data: 이미지를 위한 img-src 도 함께 허용한다.
     // (그 외 디렉티브는 helmet useDefaults 가 채운다.)
     ...defaultGlobalMiddleware({
         helmet: {
@@ -27,8 +27,8 @@ export default [
                 directives: {
                     defaultSrc: ["'self'"],
                     scriptSrc: ["'self'", "'unsafe-inline'"],
-                    styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://cdnjs.cloudflare.com'],
-                    fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com', 'https://cdnjs.cloudflare.com'],
+                    styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+                    fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
                     imgSrc: ["'self'", 'data:', 'http://localhost:3000', 'http://localhost:3001'],
                     connectSrc: ["'self'", 'http://localhost:3000', 'http://localhost:3001'],
                 },
