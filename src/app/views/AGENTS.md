@@ -11,6 +11,10 @@ This folder holds two kinds of view files:
 
 - Each `*.tsx` default-exports a component; the file name is the page key
   (`Home.tsx` → `Home`, used by `router.GET_REACT('Home')`). Nested dirs → dotted keys.
+  Samples: `Home.tsx` (landing) and `Demo.tsx` — the latter demonstrates client-side
+  react-router navigation, served at `/demo` and `/demo/:view` (the `[view]` route keeps
+  sub-path refreshes safe). Pages may use react-router (`NavLink`/`Routes`/`useLocation`)
+  since the extension mounts every page inside a `BrowserRouter`.
 - `app.css` is the Tailwind v4 input (`@import "tailwindcss";` + `@theme`). The extension
   compiles it with `@tailwindcss/postcss` (scanning `views/**` for class names) and serves
   the result at `/__kusto_react/client.css`, linked into every shell — **no build script**.

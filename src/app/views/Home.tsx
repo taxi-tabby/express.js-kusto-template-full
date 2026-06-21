@@ -78,6 +78,7 @@ export default function Home({ FRAMEWORK_URL, NODE_ENV }: HomeProps) {
                     </span>
                 </div>
                 <div className="flex items-center gap-5 font-mono text-[12px] text-muted">
+                    <a href="/demo" className="transition-colors hover:text-ink">Demo</a>
                     {isDev ? (
                         <>
                             <a href="/docs" className="hidden transition-colors hover:text-ink sm:inline">Docs</a>
