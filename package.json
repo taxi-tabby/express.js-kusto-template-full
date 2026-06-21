@@ -36,6 +36,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@expressjs-kusto/react": "^0.2.0",
     "@types/archiver": "^7.0.0",
     "@types/yauzl": "^2.10.3",
     "archiver": "^7.0.1",
@@ -50,6 +51,9 @@
     "module-alias": "^2.2.3",
     "multer": "^2.0.1",
     "qs": "^6.15.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.0",
     "winston": "^3.12.0",
     "winston-daily-rotate-file": "^5.0.0",
     "yauzl": "^3.2.1"

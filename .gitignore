@@ -24,6 +24,9 @@ src/core/tmp/
 .nfs*
 
 ### Node ###
+# Kusto React extension build output (outDir, default .kusto/react)
+.kusto/
+
 # Logs
 logs
 *.log
