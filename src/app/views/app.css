@@ -5,37 +5,38 @@
  * scanning src/app/views/** for class names, and serves the result at
  * /__kusto_react/client.css (linked into every GET_REACT shell). No build script needed.
  *
- * Aesthetic: warm "engineering paper" — ink on bone, one deep-green accent, editorial grid.
+ * Aesthetic: crisp "engineering paper" — ink on bone, one deep-green accent, dense Swiss grid.
  */
 @import "tailwindcss";
 
 @theme {
     /* Surface — warm paper */
-    --color-paper: #ece7dc;
-    --color-paper-2: #e3ddcf;
-    --color-ink: #15140d;
-    --color-ink-soft: #36342a;
-    --color-muted: #79755f;
-    --color-line: #cbc5b4;
-    --color-line-soft: #d8d2c3;
+    --color-paper: #ece8de;
+    --color-paper-2: #e4dfd2;
+    --color-ink: #17150e;
+    --color-ink-soft: #38362b;
+    --color-muted: #767259;
+    --color-line: #cec8b6;
+    --color-line-soft: #ddd7c7;
 
     /* One accent — flat botanical green (a nod to the brand, no neon) */
-    --color-accent: #0f5d3a;
-    --color-accent-soft: #1c7a4e;
+    --color-accent: #0e5c3a;
+    --color-accent-soft: #1a7a4d;
+    --color-accent-ink: #0a3f28;
 
-    /* Type system */
-    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-    --font-sans: "IBM Plex Sans KR", ui-sans-serif, system-ui, sans-serif;
+    /* Type system — sturdy grotesque display, clean KR body, technical mono */
+    --font-display: "Archivo", "IBM Plex Sans KR", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "IBM Plex Sans KR", ui-sans-serif, system-ui, -apple-system, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
     /* Orchestrated load */
-    --animate-rise: rise 0.85s cubic-bezier(0.22, 0.68, 0.18, 1) both;
-    --animate-line: line-grow 1s cubic-bezier(0.65, 0, 0.2, 1) both;
+    --animate-rise: rise 0.7s cubic-bezier(0.22, 0.68, 0.18, 1) both;
+    --animate-line: line-grow 0.9s cubic-bezier(0.65, 0, 0.2, 1) both;
 
     @keyframes rise {
         from {
             opacity: 0;
-            transform: translateY(14px);
+            transform: translateY(12px);
         }
         to {
             opacity: 1;
@@ -54,6 +55,10 @@
 }
 
 @layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
     html,
     body {
         margin: 0;
