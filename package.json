@@ -36,7 +36,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@expressjs-kusto/react": "^0.2.0",
+    "@expressjs-kusto/react": "^0.3.0",
     "@types/archiver": "^7.0.0",
     "@types/yauzl": "^2.10.3",
     "archiver": "^7.0.1",

@@ -1,23 +1,32 @@
-# views/ - Server-Side Templates
+# views/ - Server templates + React pages (CSR)
 
-Folder for server-side rendered view files using the EJS template engine.
+This folder holds two kinds of view files:
 
-## Template Engine
+1. **EJS server-side templates** (`.ejs`) — legacy, rendered via `res.render('name', data)`.
+2. **React pages** (`.tsx`/`.jsx`) for the `@expressjs-kusto/react` extension, plus its
+   Tailwind entry `app.css`. This is the extension's default `pagesDir` **and** `cssEntry`
+   (`views` / `views/app.css`), so React pages and their styles live here by convention.
 
-**EJS** (Embedded JavaScript) — `.ejs` extension
+## React pages (CSR, @expressjs-kusto/react)
 
-## Usage in Routes
+- Each `*.tsx` default-exports a component; the file name is the page key
+  (`Home.tsx` → `Home`, used by `router.GET_REACT('Home')`). Nested dirs → dotted keys.
+- `app.css` is the Tailwind v4 input (`@import "tailwindcss";` + `@theme`). The extension
+  compiles it with `@tailwindcss/postcss` (scanning `views/**` for class names) and serves
+  the result at `/__kusto_react/client.css`, linked into every shell — **no build script**.
+- `.tsx` pages are bundled by the extension's **esbuild**, not the project `tsc`/webpack
+  (project `tsconfig` `include` is `**/*.ts` only). `@types/react` is installed for IDE.
+- Web fonts / Font Awesome used by pages are injected via the extension `head` option in
+  `src/app/extensions/react.ts`; the Helmet CSP in `src/app/routes/middleware.ts` must allow
+  the shell's inline bootstrap script and those CDN hosts.
+
+## EJS templates
+
+The framework still supports EJS (`Core` sets the `ejs` view engine with `views/` as the
+templates dir), so `.ejs` files can be added here and rendered with `res.render`:
 
 ```typescript
-// EJS rendering in route.ts
-res.render('index', {
-    FRAMEWORK_URL: 'https://example.com',
-    NODE_ENV: process.env.NODE_ENV
-});
+res.render('name', { FRAMEWORK_URL: '...', NODE_ENV: process.env.NODE_ENV });
 ```
-
-## Conventions
-
-- Primarily used for the development-mode dashboard, landing pages, and similar
-- In production, JSON API responses are the norm
-- Passing variables: `<%= variableName %>`, conditionals: `<% if (...) { %>`
+- Variables: `<%= variableName %>`, conditionals: `<% if (...) { %>`.
+- The old `index.ejs` landing page was removed; the live landing page is now `Home.tsx` (CSR).
