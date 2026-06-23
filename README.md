@@ -35,12 +35,7 @@ npm run test:cli            # CLI 만
 npm run test:coverage       # 커버리지 리포트
 ```
 
-기본 backend 는 SQLite `:memory:` (실제로는 worker 별 임시 파일). PostgreSQL 검증은 `KUSTO_TEST_DB=postgres npm test`.
-
-자세한 spec: [`docs/superpowers/specs/2026-05-03-jest-core-regression-tests-design.md`](./docs/superpowers/specs/2026-05-03-jest-core-regression-tests-design.md).
-
-
 
 ## 라이선스
 
-ISC
+MIT
